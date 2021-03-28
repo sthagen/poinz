@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledAppStatus = styled.div`
-  padding: 48px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const StyledAppStatusMain = styled.div`
+  padding: 12px 48px;
 `;
 
 export const StyledRoomsList = styled.ul`
