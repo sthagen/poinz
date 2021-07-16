@@ -1,4 +1,4 @@
-sudo: required
+os: linux
 
 services:
   - docker
@@ -25,8 +25,10 @@ script:
   - npm test
   - npm run build
 
+# --all-tags was introduced in version v20.10, older versions pushed all images automatically if no tag was provided
 after_success:
  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-   docker login --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD";
-   docker push xeronimus/poinz;
+   docker -v;
+   echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
+   docker image push --all-tags "${DOCKER_USERNAME}/poinz" || docker image push "${DOCKER_USERNAME}/poinz";
    fi

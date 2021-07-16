@@ -46,6 +46,12 @@ module.exports = {
         use: 'babel-loader'
       },
       {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      },
+      {
         // load images: if filesize is lower than limit -> data-url (base64), plain url and packed file otherwise
         test: /\.(|png|jpg|gif)$/,
         use: {
@@ -105,6 +111,8 @@ module.exports = {
   },
 
   plugins: [definePlugin],
+
+  resolve: {extensions: ['.wasm', '.mjs', '.js', '.jsx', '.json']},
 
   devServer: {
     // enables support for HTML5 urls ( http://host:port/context/ROOM instead of http://host:port/context/#ROOM)
